@@ -2,6 +2,7 @@ header{
     height: 100px;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: sticky;
 
     .wrapper{
         display: flex;
@@ -55,6 +56,7 @@ header{
             align-items: center;
             flex-direction: column;
             gap: 36px;
+            
 
             a{
                 font-size: 23px;
@@ -75,6 +77,11 @@ header{
                 justify-content: flex-end;
                 gap: 36px;
                 align-items: center;
+                position: absolute;
+                background: none;
+                box-shadow: none;
+                flex-direction: column;
+                
 
                 a{
                     text-decoration: none;
