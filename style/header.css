@@ -1,15 +1,17 @@
-header{
+header {
     height: 100px;
     width: 100%;
+    /* Stín a fixní pozice */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: fixed;
-    /* ▼▼▼ PŘIDEJ TOHLE ▼▼▼ */
-    background-color: white;  /* Aby hlavička nebyla průhledná */
-    z-index: 1000;            /* Aby byla vždycky NAD obrázkem */
-    /* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    top: 0;
+    left: 0;
     
+    /* Pozadí musí být bílé, aby neprosvítal text při scrollování */
+    background-color: white; 
+    z-index: 1000; /* Header je nejvyšší vrstva */
 
-    .wrapper{
+    .wrapper {
         display: flex;
         justify-content: space-between;
         gap: 36px;
@@ -17,21 +19,23 @@ header{
         width: 100%;
         max-width: 1800px;
         margin: auto;
-        padding: 0 36px;
+        padding: 0 20px; /* Zmenšeno padding pro mobily */
 
-        .wrapper-logo{
+        /* LOGO */
+        .wrapper-logo {
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 1002; /* Logo musí být vždy klikatelné */
             
-            img{
+            img {
                 max-height: 90%;
                 width: auto;
             }
         }
 
-        .hamburger{
+        /* HAMBURGER IKONA */
+        .hamburger {
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -40,110 +44,107 @@ header{
             cursor: pointer;
             background: none;
             border: none;
-            z-index: 100;
+            z-index: 1002; /* Ikona musí být nad menu, aby šlo zavřít */
 
-            .stick{
+            .stick {
                 border: 2px solid black;
                 border-radius: 10px;
                 height: 2px;
                 width: 100%;
                 opacity: 1;
                 transition: ease .3s all;
-            }
-            
-        }
-
-        nav{
-            position: absolute;
-            background-color: white;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            height: 100vh;
-            width: 100%;
-            margin: 0 -36px;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 36px;
-            right: -100%;
-            transition: ease .5s all;
-
-            @media only screen and (min-width: 600px){
-                width: 50%;
-            }
-
-
-
-            a{
-                font-size: 23px;
-                font-weight: 600;
-                text-decoration: none;
-                color: black;
-                font-family: Arial, Helvetica, sans-serif;
-
+                background-color: black;
             }
         }
-
-        nav.active{
-            transform: translateX(-108%);
-
-            @media only screen and (min-width: 600px){
-                transform: translateX(-209%);
-            }
-            
-        }
-
-        .hamburger.active{
-              .stick:nth-child(1){
+        
+        /* Animace křížku */
+        .hamburger.active {
+            .stick:nth-child(1) {
                 transform: rotate(45deg) translate(7px, 7px);
             }
-
-            .stick:nth-child(2){
+            .stick:nth-child(2) {
                 opacity: 0;
             }
-
-            .stick:nth-child(3){
+            .stick:nth-child(3) {
                 transform: rotate(-45deg) translate(7px, -7px);
             }
         }
 
+        /* NAVIGACE (MOBILNÍ POHLED - VÝCHOZÍ) */
+        nav {
+            position: fixed; /* Vytrhneme menu z toku dokumentu */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Přes celou výšku */
+            background-color: white;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vycentrovat odkazy svisle */
+            align-items: center;     /* Vycentrovat odkazy vodorovně */
+            gap: 40px;
+            
+            /* Důležité: Startovní pozice MIMO obrazovku (vpravo) */
+            transform: translateX(100%); 
+            transition: transform 0.4s ease-in-out;
+            
+            z-index: 900; /* Musí být pod header lištou (1000), ale nad obsahem */
+            padding-top: 100px; /* Aby odkazy nebyly schované pod logem */
 
+            a {
+                font-size: 26px; /* Větší písmo pro mobil */
+                font-weight: 600;
+                text-decoration: none;
+                color: black;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
 
+        /* NAVIGACE (MOBILNÍ POHLED - AKTIVNÍ/OTEVŘENO) */
+        nav.active {
+            /* Vrátíme menu na pozici 0 (na obrazovku) */
+            transform: translateX(0%);
+        }
+
+        /* DESKTOP VERZE (NAD 768px) */
         @media only screen and (min-width: 768px) {
-            .hamburger{
-                display: none;
+            .hamburger {
+                display: none; /* Skryjeme hamburger */
             }
 
-            nav{
-                display: flex;
+            nav {
+                /* Resetujeme mobilní styly */
+                position: relative;
+                top: auto;
+                left: auto;
+                height: 100%;
+                width: auto;
+                background: none;
+                padding-top: 0;
+                
+                flex-direction: row;
                 justify-content: flex-end;
                 gap: 36px;
-                align-items: center;
-                position: relative;
-                background: none;
-                box-shadow: none;
-                flex-direction: row;
-                padding-right: 36px;
-                right: 0;
-                width: 100%;
-                height: 100%;
+                
+                transform: none; /* Žádné posouvání */
+                transition: none; /* Žádná animace při změně velikosti okna */
 
-                a{
-                    text-decoration: none;
-                    color: inherit;
+                a {
+                    font-size: 21px; /* Menší písmo pro desktop */
                     font-weight: 500;
-                    font-size: 21px;
-                    font-family: Arial, Helvetica, sans-serif;
                     transition: ease .3s all;
                 }
 
-                a:hover{
-                    color: red;
-                    /*font-size: 23px;*/
-                    transform: scale(1.04);
-                    /*text-decoration: underline; */
+                a:hover {
+                    color: #d82e2e; /* Červená při najetí */
+                    transform: scale(1.05);
                 }
+            }
+            
+            /* Pojistka, aby active třída na desktopu nic nerozbila */
+            nav.active {
+                transform: none;
             }
         }   
     }

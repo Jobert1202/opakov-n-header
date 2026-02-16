@@ -1,0 +1,101 @@
+footer {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 50px;
+    border-top: 4px solid #d82e2e; /* Červený proužek nahoře */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Podtržítko pod nadpisy */
+.footer-section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #d82e2e;
+}
+
+.footer-section p {
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.footer-section.links ul {
+    list-style: none;
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section.links a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section.links a:hover {
+    color: white;
+    padding-left: 5px; /* Malý posun při hoveru */
+}
+
+.socials {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.socials a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #555;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.socials a:hover {
+    background-color: #d82e2e;
+    border-color: #d82e2e;
+}
+
+.footer-bottom {
+    background-color: #111;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Responsivita pro footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+}
